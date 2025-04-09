@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern mobile application for job seekers to track applications, save opportunities, and manage their career journey.
 
-## Get started
+## ✨ Key Features
+- **Bookmark System**: Save and organize job opportunities
+- **Application Tracker**: Monitor job application statuses
+- **Modern UI**: Clean, intuitive interface with smooth navigation
+- **Offline Support**: AsyncStorage for persistent data
+- **Context API**: Efficient state management
 
-1. Install dependencies
+## 🛠 Tech Stack
+- **Frontend**: React Native, Expo Router
+- **State Management**: React Context API
+- **Navigation**: Expo Router with tab-based navigation
+- **Storage**: @react-native-async-storage/async-storage
+- **UI Components**: React Native Elements, custom styled components
+- **Development**: TypeScript, Expo SDK
 
+## 🚀 Project Structure
+```
+my-job-app/
+├── app/                  # App routes and screens
+│   ├── bookmarks/        # Bookmarks functionality
+│   ├── jobs/             # Job tracking screens
+│   ├── context/          # Global state management
+│   └── _layout.js        # Root navigation setup
+├── screens/              # Legacy screens (being migrated)
+├── utils/                # Utility functions
+└── package.json          # Project dependencies
+```
+
+## 🔧 Development Workflow
+1. **Setup**:
    ```bash
+   git clone https://github.com/MrUmarIftikhar/My-Job-app.git
+   cd My-Job-app
    npm install
    ```
 
-2. Start the app
-
+2. **Running the App**:
    ```bash
-    npx expo start
+   npm start
    ```
+   - Scan QR code with Expo Go app
+   - Or run on simulator: press `i` (iOS) or `a` (Android)
 
-In the output, you'll find options to open the app in a
+3. **Key Implementation Details**:
+   - Implemented custom BookmarkContext for global state
+   - Created responsive layouts with React Native StyleSheet
+   - Optimized navigation with Expo Router
+   - Used TypeScript for type safety
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📈 Future Improvements
+- [ ] Implement user authentication
+- [ ] Add push notifications
+- [ ] Dark mode support
