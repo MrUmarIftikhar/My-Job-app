@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, ActivityIndicator, Text, StyleSheet, RefreshControl } from 'react-native';
 import axios from 'axios';
 import JobCard from '../components/JobCard';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { useBookmarks } from '../context/BookmarkContext';
 
 const JobsScreen = () => {
@@ -13,12 +13,12 @@ const JobsScreen = () => {
   const [error, setError] = useState(null);
 
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   const fetchJobs = async (pageNum = 1, append = false) => {
     try {
       if (!append) setLoading(true);
-      const res = await axios.get('https://testapi.getlokalapp.com/common/jobs?page=${pageNum}');
+      const res = await axios.get(`https://testapi.getlokalapp.com/common/jobs?page=${pageNum}`);
       const newJobs = res.data?.data || [];
       setJobs(prev => append ? [...prev, ...newJobs] : newJobs);
       setPage(pageNum);
@@ -47,7 +47,7 @@ const JobsScreen = () => {
   const renderItem = ({ item }) => (
     <JobCard
       job={item}
-      onPress={() => navigation.navigate('JobDetail', { job: item })}
+      onPress={() => router.push(`/jobs/${item.id}`)}
       onBookmark={() =>
         isBookmarked(item.id) ? removeBookmark(item.id) : addBookmark(item)
       }

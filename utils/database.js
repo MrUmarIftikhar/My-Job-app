@@ -1,6 +1,15 @@
 import * as SQLite from 'expo-sqlite';
+import { Platform } from 'react-native';
 
-const db = SQLite.openDatabase('bookmarks.db');
+const db = Platform.OS === 'web'
+  ? {
+      transaction: () => {
+        return {
+          executeSql: () => {}
+        };
+      }
+    }
+  : SQLite.openDatabase('bookmarks.db');
 
 export const initDB = () => {
   db.transaction(tx => {

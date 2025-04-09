@@ -1,11 +1,10 @@
-
 import React, { useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useBookmarks } from '../context/BookmarkContext';
 import JobCard from '../components/JobCard';
-import { useNavigation } from '@react-navigation/native';
 
-const BookmarksScreen = () => {
+export default function BookmarksScreen() {
   const {
     bookmarks,
     loading,
@@ -13,7 +12,7 @@ const BookmarksScreen = () => {
     isBookmarked,
     refreshBookmarks
   } = useBookmarks();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     refreshBookmarks();
@@ -22,7 +21,7 @@ const BookmarksScreen = () => {
   const renderItem = ({ item }) => (
     <JobCard
       job={item}
-      onPress={() => navigation.navigate('JobDetail', { job: item })}
+      onPress={() => router.push(`/jobs/${item.id}`)}
       onBookmark={() => removeBookmark(item.id)}
       bookmarked={isBookmarked(item.id)}
     />
@@ -51,7 +50,7 @@ const BookmarksScreen = () => {
       renderItem={renderItem}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   centered: {
@@ -60,5 +59,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default BookmarksScreen;
