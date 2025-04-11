@@ -60,9 +60,6 @@ my-job-app/
 - [ ] Add push notifications
 - [ ] Dark mode support
 
-
-
-
 ---
 ✨ **Crafted with care by Umar Iftikhar
 📧 Contact: umarkb2879@gmail.com
