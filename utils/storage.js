@@ -8,6 +8,7 @@ export const getBookmarks = async () => {
     return jsonValue != null ? JSON.parse(jsonValue) : [];
   } catch (error) {
     console.error('Error reading bookmarks:', error);
+    alert('Failed to load bookmarks. Please try again later.');
     return [];
   }
 };

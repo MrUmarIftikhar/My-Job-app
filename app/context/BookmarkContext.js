@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 
-export const BookmarkContext = createContext();
+const BookmarkContext = createContext();
 
-export function BookmarkProvider({ children }) {
+export default function BookmarkProvider({ children }) {
   const [bookmarks, setBookmarks] = useState([]);
 
   const addBookmark = (job) => {

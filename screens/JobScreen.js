@@ -18,13 +18,26 @@ const JobsScreen = () => {
   const fetchJobs = async (pageNum = 1, append = false) => {
     try {
       if (!append) setLoading(true);
-      const res = await axios.get(`https://testapi.getlokalapp.com/common/jobs?page=${pageNum}`);
-      const newJobs = res.data?.data || [];
+      const res = await axios.get(`https://testapi.getlokalapp.com/common/jobs`, {
+        params: {
+          page: pageNum,
+          limit: 20
+        },
+        headers: {
+          'Accept': 'application/json',
+          'Cache-Control': 'no-cache'
+        },
+        timeout: 10000 // 10 second timeout
+      });
+      const newJobs = Array.isArray(res.data.results) ? res.data.results : []; // Corrected line
+      if (!Array.isArray(newJobs)) {
+        throw new Error('Invalid data format');
+      }
       setJobs(prev => append ? [...prev, ...newJobs] : newJobs);
       setPage(pageNum);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch jobs');
+      setError('Unable to fetch jobs at this time. Please try again later.');
     } finally {
       setLoading(false);
       setRefreshing(false);

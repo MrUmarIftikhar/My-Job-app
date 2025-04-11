@@ -1,10 +1,11 @@
 import { Stack } from 'expo-router';
+import { Redirect } from 'expo-router';
 
 export default function BookmarksLayout() {
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="bookmarks-screen" 
+        name="index"
         options={{
           title: 'Bookmarks'
         }}
