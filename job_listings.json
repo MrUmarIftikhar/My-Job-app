@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "id": 606376,
+      "title": "Satyam Home Care Services wants nannies and ward boys for patient care housework and cooking.",
+      "primary_details": {
+        "Place": "Hyderabad",
+        "Salary": "₹18,000 - ₹25,000+",
+        "Job_Type": "Full Time",
+        "Experience": "Less than 1 year",
+        "Qualification": "Not Required"
+      },
+      "job_tags": [
+        {
+          "value": "40 Vacancies",
+          "bg_color": "#E7F3FE",
+          "text_color": "#0E56A8"
+        }
+      ],
+      "job_category": "Medical/ Doctor",
+      "company_name": "Satyam Home Care Services",
+      "contact_preference": {
+        "whatsapp_link": "https://wa.me/916302532832?text=Hi%2C+I+am+interested+to+apply+on+the+job+opening+for+Satyam+Home+Care+Services."
+      }
+    },
+    {
+      "id": 605947,
+      "title": "Wanted Tele Sales Executives",
+      "primary_details": {
+        "Place": "Hyderabad",
+        "Salary": "-",
+        "Job_Type": "Full Time",
+        "Experience": "Less than 1 year",
+        "Qualification": "Graduate"
+      },
+      "job_tags": [
+        {
+          "value": "40 Vacancies",
+          "bg_color": "#E7F3FE",
+          "text_color": "#0E56A8"
+        }
+      ],
+      "job_category": "Telecalling/BPO",
+      "company_name": "Local app",
+      "contact_preference": {
+        "whatsapp_link": "https://wa.me/919985628338?text=Hi%2C+I+am+interested+to+apply+on+the+job+opening+for+Wanted+Tele+Sales+Executives."
+      }
+    }
+  ]
+}

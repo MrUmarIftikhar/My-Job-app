@@ -7,8 +7,35 @@ import { useBookmarks } from '../../context/BookmarkContext';
 
 const API_URL = 'https://testapi.getlokalapp.com/common/jobs';
 
+// Mock data for fallback when API fails
+const getMockJobs = (page) => {
+  const mockJobs = [];
+  const baseJob = {
+    id: 1000 + (page * 20),
+    title: "Software Developer",
+    location: "Remote",
+    salary: "₹25,000 - ₹40,000",
+    phone: "123-456-7890",
+    description: "Join our team as a software developer and work on exciting projects."
+  };
+  
+  for (let i = 0; i < 20; i++) {
+    mockJobs.push({
+      ...baseJob,
+      id: baseJob.id + i,
+      title: `${baseJob.title} - ${page}.${i+1}`,
+      location: i % 3 === 0 ? "Remote" : i % 3 === 1 ? "Hyderabad" : "Bangalore",
+      salary: `₹${25 + i}000 - ₹${40 + i}000`,
+      phone: baseJob.phone.replace(/\d{4}$/, String(1000 + i).padStart(4, '0'))
+    });
+  }
+  
+  return mockJobs;
+};
+
 const fetchJobs = async (page) => {
   try {
+    console.log(`Fetching jobs for page ${page}...`);
     const response = await axios.get(`${API_URL}?page=${page}&limit=30`, {
       headers: {
         'Accept': 'application/json',
@@ -17,16 +44,16 @@ const fetchJobs = async (page) => {
       timeout: 10000
     });
     
-    // Handle the API response - it's an array of job objects directly
-    // No 'data' property as previously expected
     let jobsData = [];
     
     // Check if response.data is an array (direct array response)
     if (Array.isArray(response.data)) {
+      console.log('Response is an array');
       jobsData = response.data;
     } 
     // Check if response.data has a results property (nested response)
     else if (response.data && Array.isArray(response.data.results)) {
+      console.log('Response has results array');
       jobsData = response.data.results;
     }
     // Fallback to empty array if neither format is found
@@ -35,32 +62,21 @@ const fetchJobs = async (page) => {
       jobsData = [];
     }
     
-    // If we have fewer than 20 jobs per page, create additional mock jobs
-    // This is just for demonstration purposes to show infinite scroll with more data
-    if (jobsData.length > 0 && jobsData.length < 20) {
-      const baseJob = jobsData[0];
-      const additionalJobs = [];
-      
-      // Create additional mock jobs based on the first job
-      for (let i = 0; i < 19; i++) {
-        const mockJob = {
-          ...baseJob,
-          id: baseJob.id + 1000 + (page * 20) + i, // Ensure unique IDs
-          title: `${baseJob.title} - ${page}.${i+1}`,
-          location: `${baseJob.location} - Area ${i+1}`,
-          salary: `${parseInt(baseJob.salary.replace(/[^0-9]/g, '')) + (i * 1000)}`,
-          phone: baseJob.phone.replace(/\d{4}$/, String(1000 + i).padStart(4, '0'))
-        };
-        additionalJobs.push(mockJob);
-      }
-      
-      jobsData = [...jobsData, ...additionalJobs];
-    }
+    // Transform API data to match our app's expected format
+    const formattedJobs = jobsData.map(job => ({
+      id: job.id,
+      title: job.title,
+      location: job.primary_details?.Place || job.city_location || 'Location not specified',
+      salary: job.primary_details?.Salary || `₹${job.salary_min || 0} - ₹${job.salary_max || 0}`,
+      phone: job.whatsapp_no || '123-456-7890',
+      description: job.content || job.contentV3 || 'No description available'
+    }));
     
-    return jobsData;
+    return formattedJobs.length > 0 ? formattedJobs : getMockJobs(page);
   } catch (error) {
     console.error('Error fetching jobs:', error);
-    throw error;
+    // Return mock data as fallback when API fails
+    return getMockJobs(page);
   }
 };
 

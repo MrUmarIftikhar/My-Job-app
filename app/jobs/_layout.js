@@ -6,13 +6,15 @@ export default function JobsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: 'Jobs'
+          title: 'Jobs',
+          headerShown: false, // Hide the header for the jobs index
         }}
       />
       <Stack.Screen
         name="[id]"
         options={{
-          title: 'Job Details'
+          title: 'Job Details',
+          headerShown: true, // Keep the header for job details
         }}
       />
     </Stack>
